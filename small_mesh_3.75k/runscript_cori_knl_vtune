@@ -1,0 +1,11 @@
+#!/bin/bash
+
+export OMP_NUM_THREADS=1
+export OMP_PLACES=threads
+export OMP_PROC_BIND=spread
+export OMP_STACKSIZE=8000000
+#export SWDIR=/project/projectdirs/m499/rhager/software/cori1/intel/
+
+module load vtune
+
+srun -n 64 -c 272 --cpu_bind=cores amplxe-cl -collect general-exploration -r res_dir -trace-mpi -finalization-mode=none -- /global/cscratch1/sd/eyoon/xgc_scorec/XGC1/XGC1_3fldEMsolver/xgc-es >& xgc1_${SLURM_JOB_ID}.log

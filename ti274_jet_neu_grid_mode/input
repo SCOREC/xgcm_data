@@ -1,0 +1,226 @@
+&sml_param
+!sml_sort_particles=1000  ! for KNL
+!sml_veclen=32  ! for KNL
+sml_gpu_ratio=0.8D0
+sml_sort_gpu_freq=5
+sml_machine=10            ! 0 circular, 1:D3D, 
+sml_node_file='JINTRAC_79688_ppfseq439_v4.eqdsk.node'
+sml_ele_file= 'JINTRAC_79688_ppfseq439_v4.eqdsk.ele'
+!sml_marker_temp_factor=2.5D0
+!sml_marker_min_temp=1D3
+sml_model_file='JINTRAC_79688_ppfseq439_v4.eqdsk_pumiModel.dmg'
+sml_mesh_file='JINTRAC_79688_ppfseq439_v4.eqdsk_pumiMesh.smb'  
+sml_flat_marker=.t.
+sml_flat_marker_decay_start1=3D0
+sml_flat_marker_width1=1D0
+
+sml_dwdt_exb_only=.f.
+sml_00_npsi=700
+
+sml_special=0             ! 0: normal simulation, 1: single particle simulation
+sml_dt=0.003          ! delta-t for one time step - unit of toroidal transit time. 
+sml_mstep=500          ! totoal time step
+sml_deltaf=.t.              ! delta-f simulation switch - incomplete
+sml_turb_efield=.t.
+sml_00_efield=.t.
+sml_electron_on=.t.
+sml_nphi_total=16
+sml_bounce=0              ! Particle motion boundary condition 
+sml_nhybrid=1
+                          ! 1 for edge simulation (including open field line region)
+                          ! 2 for core simulation (excluding open field line region)
+sml_deltaf_f0_mode=-2
+sml_initial_deltaf_noise=0D-14
+sml_limiter=1             ! Limiter on/off
+sml_inpsi=0.0d0             ! inner boundary of simulation - unit of eq_x_psi
+sml_outpsi=1.10d0           ! outter boundary of simulation - unit of eq_x_psi
+sml_co_cur_bt=.t.
+sml_restart_write_period=20
+sml_restart=.t.
+sml_zero_inner_bd=0
+sml_guess_table_size=900
+sml_input_file_dir='../XGC-1_inputs/'
+sml_bd_ext_delta2=-0.01
+sml_bd_ext_delta1=-0.003
+sml_bd_ext_delta3=0.04
+sml_bd_ext_delta4=0.04
+sml_bd_ext_delta2H=0.02
+sml_max_mat_width=300
+sml_bd_Te_mode=0
+sml_bd_Te_width=0.01D0
+sml_sheath_mode=1
+sml_sheath_adjust=.t.
+sml_sheath_init_pot_factor=2.5
+sml_rgn1_pot0_only=.false.
+sml_add_pot0=0
+sml_zero_out_total_charge=.false.
+sml_pol_decomp=.true.
+sml_f0_grid=.t.
+sml_f0_grid_alpha=0.000
+sml_source=.t.
+sml_f_source_period=2
+sml_symmetric_f=.t.
+sml_rhomax=1.0D-2
+sml_iter_solver=.t.
+sml_iter_solver_niter=10
+sml_poisson_solver_type=0
+sml_max_imbalance=1.2D0
+sml_grid_nrho=6
+sml_ignore_drift_near_wall=.f.
+sml_ignore_drift_r0=0.390
+sml_ignore_drift_z0=-1.5027
+sml_ignore_drift_slope1=-50
+sml_ignore_drift_slope2=-50
+sml_ncycle_half=27
+sml_neutral=.t.
+sml_neutral_use_ion_loss=.f.
+sml_neutral_start_step=100
+sml_f0_grid_lbal_period=10
+sml_f0_grid_init_ptl_imbal = 1.10
+sml_wedge_n=2
+/
+
+&ptl_param
+ptl_mass_au=2D0             ! 1 for hydrogen, 2 for deutron
+ptl_charge_eu=1D0            ! ion charge
+ptl_num=100000             ! number of particle for simulation
+ptl_maxnum=400000
+ptl_e_mass_au=0.56D-3
+/
+
+&eq_param ! Initial equilibrium profile - Tanh profile
+eq_filename='JET_JINTRAC_79688.eqd'
+
+eq_set_x2=.f.
+eq_x2_r=0.40
+eq_x2_z=1.40
+
+eq_den_shape=-1
+eq_den_v1=4.0D19          ! inside value of density m^-3
+eq_den_v2=0.2D19           ! outside value of density  m^-3
+eq_den_x1=0.975D0      ! pedestal center 
+eq_den_x2=0.05D0    ! pedestal width
+eq_den_v3=6.0D19
+eq_den_x3=0D0
+eq_den_file='den_JET_79688.prf'
+
+eq_tempi_shape=-1
+eq_tempe_shape=-1
+eq_tempi_file='ti_JET_79688.prf'
+eq_tempe_file='te_JET_79688.prf'
+eq_tempi_x1=0.97D0
+eq_tempe_x1=0.97D0
+eq_tempi_x2=0.07D0
+eq_tempe_x2=0.07D0
+eq_tempi_v1=1D3      ! ion temperature (inside) - eV
+eq_tempi_v2=1d2     ! ion temperature (outside) - eV
+eq_tempe_v1=1D3
+eq_tempe_v2=1D2
+eq_tempi_v3=1.2D3
+eq_tempi_x3=0D0
+eq_tempe_v3=1.2D3
+eq_tempe_x3=0D0
+/
+
+&efld_param ! E-field calculation
+efld_mode=2              ! 0 zero efield, 1 static efield, 2 self-consistent
+efld_cutoff=0
+/
+
+&col_param  ! Collision
+col_mode=4 ! 0 : off , 1 monte-carlo (non-conserving) 2: monte-carlo (conserving)
+col_accel=.false.
+col_period=3
+col_vb_period=60
+col_f_nthreads=1
+/
+
+&diag_param ! diagnosis
+diag_1d_period=2
+diag_f0_period=20
+diag_particle_mod=0
+diag_particle_period=2
+diag_tavg_on=.f.
+diag_heat_on=.t.
+diag_heat_nsection=2
+diag_heat_zmin1=-1.77D0
+diag_heat_zmax1=-1.50D0
+diag_heat_rmin1=2.7D0
+diag_heat_rmax1=2.95D0
+diag_heat_nr=200
+diag_heat_nz=190
+diag_heat_zmin2=-1.7D0
+diag_heat_zmax2=-1.4D0
+diag_heat_rmin2=2.35D0
+diag_heat_rmax2=2.5D0
+/
+
+&neu_param            ! neutral collision
+neu_col_mode=2
+neu_grid_max_psi=1.2D0
+neu_grid_mode=1
+neu_cx_period=5
+neu_mode2_period=1000
+NEU_RECYCLE_RATE = 0.80
+neu_sepfile='sep_JET_JINTRAC_79688.dat'
+neu_limfile='lim_JET_JINTRAC_79688.dat'
+/
+
+&lim_param            ! limiter 
+
+/
+&smooth_param
+/
+&tbl_param
+/
+&src_param
+src_narea=1
+src_period=5
+src_heat_power1=10D6
+src_pin1=0.30
+src_pout1=0.70
+src_decay_width1=0.07
+
+src_heat_power2=-0.3D6
+src_pin2=0.90
+src_pout2=0.98
+src_decay_width2=0.03
+
+src_narea_e=3
+src_heat_power1_e=10D6
+src_pin1_e=0.30
+src_pout1_e=0.70
+src_decay_width1_e=0.07
+
+src_heat_power2_e=-2D6
+src_pin2_e=0.80
+src_pout2_e=0.90
+src_decay_width2_e=0.80
+
+src_heat_power3_e=-2D6
+src_pin3_e=0.95
+src_pout3_e=1.05
+src_decay_width3_e=0.07
+
+!src_pout2=1.07D0
+!src_pin2=1.02D0
+!src_decay_width2=0.06
+/
+&mon_param
+mon_flush_count=50
+/
+&prof_inparam
+!profile_papi_enable=.true.
+!profile_outpe_num = -1
+!profile_single_file = .false.
+!profile_global_stats = .false.
+/
+&papi_inparam
+/
+&f0_param
+f0_col_change_weight=.t.
+f0_smu_max=4
+f0_vp_max=4
+/
+&adios_param
+/

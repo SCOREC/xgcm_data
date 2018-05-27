@@ -1,0 +1,18 @@
+#!/bin/bash
+#SBATCH -A m499 #2538
+#SBATCH -N 64
+#SBATCH -C knl,quad,cache
+##SBATCH -p regular
+##SBATCH -t 4:00:00
+#SBATCH -p debug
+#SBATCH -t 0:15:00
+#SBATCH --perf=vtune
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=yoone@rpi.edu
+#SBATCH --job-name=xgcm
+#SBATCH -o xgcs_cori.%j.out
+#SBATCH -e xgcs_cori.%j.err
+#SBATCH -L SCRATCH
+
+./runscript_cori_knl_vtune
+

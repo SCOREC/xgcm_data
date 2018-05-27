@@ -1,0 +1,5 @@
+small_mesh_3.75k
+
+Please be aware that this case is NOT from a production run. 
+This case is just for development purpose with smaller mesh.
+Therefore, you should understand and examine input parameters in the XGC input, "input", before use.

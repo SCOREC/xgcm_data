@@ -1,0 +1,35 @@
+* Simulation
+
+    Device: JET
+    XGC Branch: 3fieldEMsolver
+    Input origin : Dr. Seung-hoe Ku @ PPPL, Apr.'17
+    Platform : CPU+GPU, Titan @ OLCF (ORNL)
+    Batch script: xgcs.ti274_0
+    
+    Species : electron+main Ion(D)
+
+    *Note that mesh is reconstructed so that PUMI formats can be obtained.
+     The resultant mesh does not exactly match with the one actually used in production run.
+     However, the numbers of nodes and elements in mesh are same order in ~K unit. (so mesh is almost same, not exactly though)
+
+* Before use the input file, you MUST CHECK in `input'
+
+    sml_input_file_dir    : directs a directory where input files are located
+
+
+* FILES for this input
+
+    input
+    adioscfg.xml
+    petsc.rc
+    JINTRAC_79688_fine_dec_19_2016.ele
+    JINTRAC_79688_fine_dec_19_2016.node
+    JET_JINTRAC_79688.eqd
+    den_JET_79688.prf
+    lim_JET_JINTRAC_79688.dat
+    sep_JET_JINTRAC_79688.dat
+    te_JET_79688.prf
+    ti_JET_79688.prf
+    xgcs.ti274_0
+
+
