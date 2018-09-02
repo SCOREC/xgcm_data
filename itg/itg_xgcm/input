@@ -1,0 +1,180 @@
+&sml_param
+sml_marker_temp_factor=1.5D0
+sml_flat_marker=.t.
+sml_flat_marker_decay_start1=3.5D0
+sml_flat_marker_decay_start2=3.5D0
+sml_machine=1             ! 0 circular, 1:D3D, 
+sml_node_file='xgc.3.75k.node'
+sml_ele_file='xgc.3.75k.ele'
+sml_model_file='g096333.03337_pumiModel.dmg'
+sml_mesh_file='g096333.03337_pumiMesh.smb'  
+sml_pol_decomp=.true.
+sml_f0_grid_alpha=0.0000D0
+sml_f0_grid_alpha_start=200
+!sml_f0_alpha1=0.000D0
+!sml_f0_alpha2=0.0000D0
+sml_bfollow=1
+sml_nhybrid=1
+sml_co_cur_bt=.true.
+sml_special=0             ! 0: normal simulation, 1: single particle simulation
+sml_dt=0.004D0            ! delta-t for one time step - unit of toroidal transit time. 
+sml_mstep=20000            ! total time step
+!!sml_mstep=1              ! total time step
+sml_turb_efield=.true.
+sml_nphi_total=16          ! es: org value = 16
+sml_bounce=3              ! Particle motion boundary condition 
+                          ! 1 for edge simulation (including open field line region)
+                          ! 2 for core simulation (excluding open field line region)
+sml_limiter=0             ! Limiter on/off
+sml_fem_matrix=1
+sml_inpsi=0.00            ! inner boundary of simulation - unit of eq_x_psi
+sml_outpsi=1.2            ! outter boundary of simulation - unit of eq_x_psi
+sml_restart_write_period=500
+sml_restart=.false.
+sml_deltaf_f0_mode=-2
+sml_guess_table_size=1000
+sml_00_efield=.t.
+sml_00_npsi=100
+sml_input_file_dir='.'
+sml_bd_ext_delta2=0.01
+sml_bd_ext_delta1=-0.1
+sml_bd_ext_delta1H=0.01
+sml_bd_ext_delta2H=0.02
+sml_bd_ext_delta3=0.02
+sml_bd_ext_delta4=0.04
+sml_bounce_zero_weight=0
+sml_weight_max=2D0
+sml_rhomax=3.8D-2
+sml_grid_nrho=4
+sml_ncycle_half=10
+sml_f_source_period=10
+sml_source=.f.
+sml_no_fp_in_f=.false.
+
+!!! >>> SCOREC test purpose
+sml_dwdt_exb_only=.true.  ! FOR conventional delta-f simulation. compile with DELTAF_MODE2
+sml_extra_dwdt=.true.     ! FOR conventional delta-f simulation. compile with DELTAF_MODE2
+
+sml_deltaf=.true.         ! SCOREC: only deltaf is supported at the moment
+sml_electron_on=.false.
+sml_poisson_solver_type=0  
+sml_iter_solver=.t.    ! ADDED for production run-like
+sml_use_simple00=.f.   ! ADDED for production run-like 
+sml_iter_solver_niter=10  !ADDED for production run-like 
+sml_f0_grid=.false.
+!! <<< SCOREC
+
+!!sml_wedge_n=2
+sml_scorec_ngroup=4
+sml_scorec_nbuffer=3
+sml_snapshot_period=2
+/
+
+&ptl_param
+ptl_mass_au=2D0             ! 1 for hydrogen, 2 for deutron
+ptl_charge_eu=1D0            ! ion charge
+ptl_num=300000             ! number of particle for simulation
+ptl_maxnum=600000
+/
+
+
+&eq_param ! Initial equilibrium profile - Tanh profile
+eq_filename='d3d096333.eqd'
+
+!!! SCOREC 
+!!eq_den_shape=5  ! ES: eq_dftn is not ready for shape 5. This input seems to come from recent version
+eq_den_shape=0    ! ES: flat density
+eq_den_v1=1.01D19          ! inside value of density m^-3
+eq_den_v2=1.0D19           ! outside value of density  m^-3
+eq_den_x1=0.800D0      ! pedestal center
+eq_den_x2=0.10D0    ! pedestal width
+eq_den_v3=1.5D19
+eq_den_x3=0D0
+!!eq_tempi_shape=-1
+!!eq_tempe_shape=-1
+eq_tempi_file='temp_alpha5.prf'
+eq_tempe_file='temp_alpha5.prf'
+!!eq_tempi_x1=0.70D0
+!!eq_tempe_x1=0.70D0
+!!eq_tempi_x2=0.1D0
+!!eq_tempe_x2=0.1D0
+!!eq_tempi_v1=3.01D3      ! ion temperature (inside) - eV
+!!eq_tempi_v2=3d3     ! ion temperature (outside) - eV
+!!eq_tempe_v1=3.01D3
+!!eq_tempe_v2=3D3
+!!eq_tempi_v3=18.0D3
+!!eq_tempi_x3=0D0
+!!eq_tempe_v3=18.0D3
+!!eq_tempe_x3=0D0
+eq_tempi_shape=1
+eq_tempe_shape=1
+eq_tempi_x1=0.97D0
+eq_tempe_x1=0.97D0
+eq_tempi_x2=0.07D0
+eq_tempe_x2=0.07D0
+eq_tempi_v1=1D3      ! ion temperature (inside) - eV
+eq_tempi_v2=1d2     ! ion temperature (outside) - eV
+eq_tempe_v1=1D3
+eq_tempe_v2=1D2
+eq_tempi_v3=5.7D3
+eq_tempi_x3=0D0
+eq_tempe_v3=5.7D3
+eq_tempe_x3=0D0
+/
+
+
+&col_param  ! Collision
+col_mode=0  ! 0 : off , 1 monte-carlo (non-conserving) 2: monte-carlo (conserving)
+/
+
+&diag_param ! diagnosis
+diag_1d_period=1
+diag_f0_period=100
+diag_tavg_on=.false.
+diag_tracer_period=10000
+diag_3d_on=.true.
+/
+
+&neu_param            ! neutral collision
+neu_col_mode=0
+/
+
+&src_param
+src_narea=2
+src_period=10   
+src_heat_power1=1.D7
+src_pin1=0.2
+src_pout1=0.25
+src_decay_width1=0.1
+src_pout2=0.80D0
+src_pin2=0.70D0
+src_decay_width2=0.1
+src_heat_power2=-1.D7
+/
+
+&f0_param
+f0_nmu=31
+f0_nvp=15
+f0_smu_max=3.0
+f0_vp_max=3.0
+f0_col_change_weight=.true.
+/
+
+&lim_param            ! limiter 
+/
+
+/
+&smooth_param
+/
+
+&tbl_param
+/
+
+&prof_inparam
+profile_papi_enable=.true.
+/
+
+&mon_param
+/
+&adios_param
+/
