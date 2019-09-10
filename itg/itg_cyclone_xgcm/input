@@ -19,7 +19,7 @@ sml_mstep=400             ! total time step
 sml_deltaf=.true.         ! SCOREC: only deltaf is supported at the moment
 sml_turb_efield=.true.
 sml_electron_on=.false.
-sml_nphi_total=16         
+sml_nphi_total=8         
 sml_bounce=3              ! Particle motion boundary condition 
                           ! 1 for edge simulation (including open field line region)
                           ! 2 for core simulation (excluding open field line region)
@@ -64,7 +64,7 @@ sml_iter_solver_niter=10   ! default value, not needed actually
 
 sml_scorec_ngroup=4
 sml_scorec_nbuffer=3
-sml_snapshot_period=2
+sml_snapshot_period=10
 !! <<< SCOREC
 /
 
@@ -148,7 +148,6 @@ f0_col_change_weight=.false.
 
 /
 &smooth_param                    ! all these are included in XGC1 
-&smooth_param
 smooth_mode_in=0
 smooth_H_mode_in=2
 smooth_H_n_in=1
