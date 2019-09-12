@@ -6,7 +6,7 @@ sml_node_file='geqdsk_gene_comp_case5_fix.eqd.node'
 sml_ele_file='geqdsk_gene_comp_case5_fix.eqd.ele'
 !sml_surf_file='EQDSK_V_3mm_FF_201rhotor_shift_HR_n384.flx.aif'  ! this is included in XGC1 input
 sml_model_file='geqdsk_gene_comp_case5_fix.eqd_pumiModel.dmg'   ! XGCm input file
-sml_mesh_file='geqdsk_gene_comp_case5_fix.eqd_pumiMesh.smb'    ! XGCm input file
+sml_mesh_file='geqdsk_gene_comp_case5_fix.eqd_pumiMesh.smb'     ! XGCm input file
 sml_f0_grid=.false.
 sml_pol_decomp=.true.
 sml_f0_grid_alpha=0.0000D0
@@ -15,7 +15,7 @@ sml_nhybrid=1
 sml_co_cur_bt=.true.
 sml_special=0             ! 0: normal simulation, 1: single particle simulation
 sml_dt=0.005D0            ! delta-t for one time step - unit of toroidal transit time. 
-sml_mstep=400             ! total time step
+sml_mstep=5               ! total time step
 sml_deltaf=.true.         ! SCOREC: only deltaf is supported at the moment
 sml_turb_efield=.true.
 sml_electron_on=.false.
@@ -44,13 +44,13 @@ sml_bounce_zero_weight=1
 sml_weight_max=2D0
 sml_rhomax=1.2D-2
 sml_grid_nrho=6
-!sml_wedge_n=24           ! XGC1 input to only simulate a portion of toroidal direction
+!sml_wedge_n=24            ! XGC1 input to only simulate a portion of toroidal direction
 sml_ncycle_half=10
 sml_f_source_period=10
 sml_source=.false.
 sml_no_fp_in_f=.false.
 sml_poisson_solver_type=0  
-sml_dwdt_exb_only=.true.  ! FOR conventional delta-f simulation. compile with DELTAF_MODE2
+sml_dwdt_exb_only=.true.   ! FOR conventional delta-f simulation. compile with DELTAF_MODE2
 sml_initial_deltaf_noise=0D-150
 !sml_mode_select_mode = 1  ! in XGC1, not yet implemented in XGCm
 !sml_mode_select_n    = 1  ! in XGC1, not yet implemented in XGCm
@@ -64,19 +64,19 @@ sml_iter_solver_niter=10   ! default value, not needed actually
 
 sml_scorec_ngroup=4
 sml_scorec_nbuffer=3
-sml_snapshot_period=10
+sml_snapshot_period=1
 !! <<< SCOREC
 /
 
 &ptl_param
-ptl_mass_au=2D0             ! 1 for hydrogen, 2 for deutron
-ptl_charge_eu=1D0           ! ion charge
-ptl_num=300000              ! number of particle for simulation
-ptl_maxnum=600000
+ptl_mass_au=2D0            ! 1 for hydrogen, 2 for deutron
+ptl_charge_eu=1D0          ! ion charge
+ptl_num=30000              ! number of particle for simulation
+ptl_maxnum=60000
 /
 
 
-&eq_param          ! Initial equilibrium profile - Tanh profile
+&eq_param                  ! Initial equilibrium profile - Tanh profile
 eq_filename='geqdsk_gene_comp_case5_fix.eqd'
 eq_den_shape=-1
 eq_den_file='den_gene_case5.prf'
@@ -116,7 +116,7 @@ diag_tracer_period=10000
 diag_3d_on=.true.
 /
 
-&neu_param            ! neutral collision
+&neu_param                 ! neutral collision
 neu_col_mode=0
 /
 
@@ -124,7 +124,7 @@ neu_col_mode=0
 src_narea=2
 src_period=10   
 src_heat_power1=2.5D6
-!src_pin1=0.2         ! not set in XGC1
+!src_pin1=0.2              ! not set in XGC1
 src_pout1=0.05
 src_decay_width1=0.15
 src_pout2=0.90D0
@@ -139,15 +139,15 @@ f0_nvp=15
 f0_smu_max=3.0
 f0_vp_max=3.0
 f0_col_change_weight=.false.
-!f0_f_correction=.true.          ! set in XGC1, but this does not seem to matter
-                                 ! as it will only be enabled with col_mod=4
+!f0_f_correction=.true.    ! set in XGC1, but this does not seem to matter
+                           ! as it will only be enabled with col_mod=4
 /
 
-&lim_param            ! limiter 
+&lim_param                 ! limiter 
 /
 
 /
-&smooth_param                    ! all these are included in XGC1 
+&smooth_param              ! all these are included in XGC1 
 smooth_mode_in=0
 smooth_H_mode_in=2
 smooth_H_n_in=1
