@@ -15,7 +15,7 @@ sml_nhybrid=1
 sml_co_cur_bt=.true.
 sml_special=0             ! 0: normal simulation, 1: single particle simulation
 sml_dt=0.005D0            ! delta-t for one time step - unit of toroidal transit time. 
-sml_mstep=5               ! total time step
+sml_mstep=201               ! total time step
 sml_deltaf=.true.         ! SCOREC: only deltaf is supported at the moment
 sml_turb_efield=.true.
 sml_electron_on=.false.
@@ -62,17 +62,17 @@ sml_iter_solver=.t.        ! this is not in XGC1
 sml_use_simple00=.f.       ! default value, not needed actually
 sml_iter_solver_niter=10   ! default value, not needed actually
 
-sml_scorec_ngroup=4
+sml_scorec_ngroup=1
 sml_scorec_nbuffer=3
-sml_snapshot_period=1
+sml_snapshot_period=10
 !! <<< SCOREC
 /
 
 &ptl_param
 ptl_mass_au=2D0            ! 1 for hydrogen, 2 for deutron
 ptl_charge_eu=1D0          ! ion charge
-ptl_num=30000              ! number of particle for simulation
-ptl_maxnum=60000
+ptl_num=300000              ! number of particle for simulation
+ptl_maxnum=600000
 /
 
 
