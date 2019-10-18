@@ -1,0 +1,19 @@
+#!/bin/bash
+#SBATCH -A m499 
+#SBATCH --qos=regular
+#SBATCH -N 8
+#SBATCH -C knl
+#SBATCH --time-min=48:00:00 
+#SBATCH --time=48:00:00
+#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=zhangc20@rpi.edu
+#SBATCH --job-name=xgcm_N=8_phi=8
+#SBATCH -o xgcm_cori.%j.out
+#SBATCH -e xgcm_cori.%j.err
+
+
+export OMP_NUM_THREADS=1
+
+srun -n 16 -c 128 --cpu_bind=cores /global/homes/z/zhangc20/source_code/xgc_scorec/XGC1/XGC1_3fldEMsolver/xgc-es >& xgcm_${SLURM_JOB_ID}.log
+
+
